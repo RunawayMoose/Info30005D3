@@ -27,6 +27,8 @@ const Patient = new Schema(
         exerciseComment: { type: String, required: false },
       },
     ],
+
+    supportMessage: { type: String, required: false },
   },
   { timestamps: true }
 );

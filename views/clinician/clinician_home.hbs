@@ -9,35 +9,32 @@
   <table>
     <tr>
       <th class="intro">Patient Name</th>
+      <th class="intro">Date of Record</th>
       <th class="intro">Blood Glucose Level (mmol/L)</th>
       <th class="intro">Weight (kg)</th>
       <th class="intro">Doses of Insulin Taken</th>
       <th class="intro">Exercise (kcal)</th>
       <th class="intro">Message</th>
-      <th class="intro">Record Time</th>
+      <th class="intro">Patient Link</th>
+
     </tr>
 
-    {{!-- {{#each records}}
+    {{#each patients}}
       <tr>
-        <td class="data-size">{{this.patient}}</td>
-        {{#if this.bloodGlucoseLevelTooHigh}}
-          <td style="color: red;" class="red-size"><b
-            >{{this.bloodGlucoseLevel}}</b></td>
-        {{else}}
-          <td class="data-size">{{this.bloodGlucoseLevel}}</td>
-        {{/if}}
-        <td class="data-size">{{this.weight}}</td>
-        {{#if this.dosesInsulinTakenTooHigh}}
-          <td style="color: red;" class="red-size"><b
-            >{{this.dosesInsulinTaken}}</b></td>
-        {{else}}
-          <td class="data-size">{{this.dosesInsulinTaken}}</td>
-        {{/if}}
-        <td class="data-size">{{this.exercise}}</td>
-        <td class="data-size">{{this.message}}</td>
-        <td class="time-size">{{this.createAt}}</td>
-
+        <td>{{name}}</td>
+        <td>{{mostRecentRecord.date}}</td>
+        <td>{{mostRecentRecord.glucose}}</td>
+        <td>{{mostRecentRecord.weight}}</td>
+        <td>{{mostRecentRecord.insulin}}</td>
+        <td>{{mostRecentRecord.exercise}}</td>
+        <td>
+          <a href="{{patientURL}}">
+            <button>
+              Patient
+            </button>
+          </a>
+        </td>
       </tr>
-    {{/each}} --}}
+    {{/each}}
   </table>
 </div>

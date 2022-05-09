@@ -1,0 +1,30 @@
+{{> navbar}}
+
+<div class="midcontent">
+  <h1>Patient: {{name}}</h1>
+  <h1>Born on {{yearOfBirth}}</h1>
+  <h1>{{bio}}</h1>
+
+
+<div class="midcontent1">
+  <table>
+    <tr>
+      <th>Date</th>
+      <th>Blood Glucose Level</th>
+      <th>Weight</th>
+      <th>Doses of Insulin Taken</th>
+      <th>Exercise</th>
+    </tr>
+    {{#each records}}
+      <tr>
+        <td>{{date}}</td>
+        <td>{{glucose}}<br />{{glucoseComment}}</td>
+        <td>{{weight}}<br />{{weightComment}}</td>
+        <td>{{insulin}}<br />{{insulinComment}}</td>
+        <td>{{exercise}}<br />{{exerciseComment}}</td>
+      </tr>
+    {{/each}}
+  </table>
+</div>
+
+</div>

@@ -68,4 +68,10 @@ router.post(
   clinicianController.registerPatient_POST
 );
 
+router.get(
+  "/patient/:patientID",
+  authMiddleware,
+  clinicianController.patientView_GET
+);
+
 module.exports = router;
