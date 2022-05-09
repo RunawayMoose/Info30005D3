@@ -1,0 +1,69 @@
+<div class="topnav">
+  <a class="active" href="./logout">Back</a>
+  <h1><b>DASHBOARD</b></h1>
+</div>
+
+<div class="midcontent">
+  <h1>How are you, {{givenName}}</h1>
+</div>
+
+<div class="GPcontent">
+  <div class="Parentcontent">
+    <form action="/patient/home" , method="post" id="addRecordForm">
+      <div class="content-gap">
+        <label for="BGLInput">Blood Glucose Level: </label>
+        <input type="number" name="glucose" />
+      </div>
+      <div class="content-gap">
+        <label for="BGLInput">Blood Glucose Level Comment: </label>
+        <input type="text" name="glucoseComment" />
+      </div>
+      <div class="content-gap">
+        <label for="WeightInput">Weight: </label>
+        <input type="number" name="weight" />
+      </div>
+      <div class="content-gap">
+        <label for="WeightInput">Weight Comment: </label>
+        <input type="text" name="weightComment" />
+      </div>
+      <div class="content-gap">
+        <label for="DILInput">Doses Insulin Taken: </label>
+        <input type="number" name="insulin" />
+      </div>
+      <div class="content-gap">
+        <label for="DILInput">Insulin Comment: </label>
+        <input type="text" name="insulinComment" />
+      </div>
+      <div class="content-gap">
+        <label for="ExerciseInput">Exercise: </label>
+        <input type="number" name="exercise" />
+      </div>
+      <div class="content-gap">
+        <label for="ExerciseInput">ExerciseComment: </label>
+        <input type="text" name="exerciseComment" />
+      </div>
+      <button type="submit" id="submitButton" class="sendbn">Send</button>
+    </form>
+  </div>
+</div>
+
+<div class="midcontent1">
+  <table>
+    <tr>
+      <th>Date</th>
+      <th>Blood Glucose Level</th>
+      <th>Weight</th>
+      <th>Doses of Insulin Taken</th>
+      <th>Exercise</th>
+    </tr>
+    {{#each records}}
+      <tr>
+        <td>{{date}}</td>
+        <td>{{glucose}}<br />{{glucoseComment}}</td>
+        <td>{{weight}}<br />{{weightComment}}</td>
+        <td>{{insulin}}<br />{{insulinComment}}</td>
+        <td>{{exercise}}<br />{{exerciseComment}}</td>
+      </tr>
+    {{/each}}
+  </table>
+</div>

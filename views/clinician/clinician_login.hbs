@@ -1,0 +1,33 @@
+<div class="topnav">
+  <b class="log-size">Clinician Log In</b>
+</div>
+
+<div style="width:100%; text-align:center">
+  {{#each flash}}
+    <p class="alert">{{this}}</p>
+  {{/each}}
+</div>
+
+<div class="GPcontent">
+  <div class="Pcontent">
+    <form action="/clinician/login" , method="post" id="loginForm">
+      <div class="content-gap">
+
+        <label for="username" class="gap-name"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="username" />
+        <label for="password" class="gap-name"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="password" />
+        <div class="checkbox">
+          <label class="content-gap">
+            <input type="checkbox" value="remember-me" />Remember me
+          </label>
+        </div>
+        <button type="submit">Log in</button>
+      </div>
+      <div class="register-style">
+        <a class="account-tell">Don't have an account?</a>
+        <a href="./register" class="no-deco">Register</a>
+      </div>
+    </form>
+  </div>
+</div>

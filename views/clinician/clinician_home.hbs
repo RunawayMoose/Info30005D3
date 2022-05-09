@@ -1,0 +1,43 @@
+{{> navbar}}
+
+<div class="midcontent">
+  <h1>Welcome back, {{username}}</h1>
+  <button>
+    <a href="/clinician/register_patient">Register new patient</a>
+  </button>
+
+  <table>
+    <tr>
+      <th class="intro">Patient Name</th>
+      <th class="intro">Blood Glucose Level (mmol/L)</th>
+      <th class="intro">Weight (kg)</th>
+      <th class="intro">Doses of Insulin Taken</th>
+      <th class="intro">Exercise (kcal)</th>
+      <th class="intro">Message</th>
+      <th class="intro">Record Time</th>
+    </tr>
+
+    {{!-- {{#each records}}
+      <tr>
+        <td class="data-size">{{this.patient}}</td>
+        {{#if this.bloodGlucoseLevelTooHigh}}
+          <td style="color: red;" class="red-size"><b
+            >{{this.bloodGlucoseLevel}}</b></td>
+        {{else}}
+          <td class="data-size">{{this.bloodGlucoseLevel}}</td>
+        {{/if}}
+        <td class="data-size">{{this.weight}}</td>
+        {{#if this.dosesInsulinTakenTooHigh}}
+          <td style="color: red;" class="red-size"><b
+            >{{this.dosesInsulinTaken}}</b></td>
+        {{else}}
+          <td class="data-size">{{this.dosesInsulinTaken}}</td>
+        {{/if}}
+        <td class="data-size">{{this.exercise}}</td>
+        <td class="data-size">{{this.message}}</td>
+        <td class="time-size">{{this.createAt}}</td>
+
+      </tr>
+    {{/each}} --}}
+  </table>
+</div>

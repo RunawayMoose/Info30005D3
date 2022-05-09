@@ -1,0 +1,196 @@
+.flex-con {
+  display: flex;
+}
+
+b1 {
+  color: #ffffff;
+  font-size: 30px;
+  width: 348px;
+  height: 201px;
+  background-color: #436d82;
+}
+
+table,
+td,
+th {
+  border: 1px solid #ffffff;
+}
+
+td,
+th {
+  padding: 20px;
+}
+
+table {
+  margin-bottom: 2rem;
+  background-color: #eaf1f4;
+  color: #568ea6;
+  width: 100%;
+  font-size: 20px;
+}
+
+th {
+  background-color: #436d82;
+  color: #ffffff;
+  font-size: 20px;
+}
+
+td {
+  text-align: center;
+}
+
+button {
+  border-radius: 100px;
+  background-color: #436d82;
+  color: white;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: #707070;
+  cursor: pointer;
+  width: 100%;
+  font-size: large;
+}
+
+input[type="text"],
+input[type="password"] {
+  border-radius: 100px;
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: 1px solid #707070;
+  box-sizing: border-box;
+  display: inline-block;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #eaf1f4;
+  color: #436d82;
+  text-align: center;
+  height: 55px;
+  font: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.topnav a {
+  float: right;
+  background-color: #436d82;
+  color: #ffffff;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.topnav a:hover {
+  background-color: #374482;
+  color: white;
+}
+
+.topnav a:active {
+  background-color: #eaf1f4;
+  color: #436d82;
+}
+
+.title {
+  font-size: 20px;
+  text-align: center;
+  margin-left: -10px;
+}
+
+.register-style {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.bigtable {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.smalltable {
+  font-size: 10px;
+}
+
+.midcontent {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.GPcontent {
+  display: table;
+  height: 100%;
+  margin: 0 auto;
+  margin-top: 120px;
+}
+
+.Parentcontent {
+  width: auto;
+}
+
+.Parentcontent #loginForm {
+  padding: 10px;
+  background-color: #eaf1f4;
+  border: 1px solid #ddd;
+  width: auto;
+  height: 350px;
+  border-radius: 20px;
+  place-items: center;
+}
+
+.Pcontent #loginForm {
+  padding: 10px;
+  background-color: #eaf1f4;
+  border: 1px solid #ddd;
+  width: 800px;
+  height: 350px;
+  border-radius: 20px;
+}
+
+.content-gap label {
+  display: inline-block;
+  width: 150px;
+  text-align: right;
+}
+
+.content-gap {
+  width: 100%;
+  display: block;
+  position: inline-block;
+  padding-top: 20px;
+  margin: auto;
+  place-items: center;
+}
+.authHeader {
+  text-align: center;
+  color: #436d82;
+}
+
+.log-size {
+  font-size: 30px;
+}
+
+.gap-name {
+  margin-left: 10px;
+  margin-top: 10px;
+}
+.no-deco {
+  text-decoration: none;
+}
+
+.midcontent1 {
+  width: auto;
+}
+
+.midcontent1 td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+}
