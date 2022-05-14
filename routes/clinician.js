@@ -1,5 +1,4 @@
 const passport = require("passport");
-const LocalStrategy = require("passport-local");
 const express = require("express");
 const router = express.Router();
 
@@ -72,6 +71,30 @@ router.get(
   "/patient/:patientID",
   authMiddleware,
   clinicianController.patientView_GET
+);
+
+router.post(
+  "/patient/:patientID/requiredFields",
+  authMiddleware,
+  clinicianController.patientView_POST_fields
+);
+
+router.post(
+  "/patient/:patientID/recordLimits",
+  authMiddleware,
+  clinicianController.patientView_POST_limits
+);
+
+router.post(
+  "/patient/:patientID/requiredFields",
+  authMiddleware,
+  clinicianController.patientView_POST_fields
+);
+
+router.post(
+  "/patient/:patientID/supportMessage",
+  authMiddleware,
+  clinicianController.patientView_POST_supportMessage
 );
 
 module.exports = router;

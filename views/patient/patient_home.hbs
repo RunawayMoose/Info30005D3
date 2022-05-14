@@ -8,44 +8,82 @@
 </div>
 
 <div class="midcontent">
-  <h1>{{supportMessage}}</h1>
+  <h1>Support Message: {{supportMessage}}</h1>
+</div>
+
+<div style="width:100%; text-align:center">
+  <p class="alert">{{errorMessage}}</p>
 </div>
 
 <div class="GPcontent">
   <div class="Parentcontent">
+    <h3>{{formMessage}}</h3>
+
     <form action="/patient/home" , method="post" id="addRecordForm">
-      <div class="content-gap">
-        <label for="BGLInput">Blood Glucose Level: </label>
-        <input type="number" name="glucose" />
-      </div>
-      <div class="content-gap">
-        <label for="BGLInput">Blood Glucose Level Comment: </label>
-        <input type="text" name="glucoseComment" />
-      </div>
-      <div class="content-gap">
-        <label for="WeightInput">Weight: </label>
-        <input type="number" name="weight" />
-      </div>
-      <div class="content-gap">
-        <label for="WeightInput">Weight Comment: </label>
-        <input type="text" name="weightComment" />
-      </div>
-      <div class="content-gap">
-        <label for="DILInput">Doses Insulin Taken: </label>
-        <input type="number" name="insulin" />
-      </div>
-      <div class="content-gap">
-        <label for="DILInput">Insulin Comment: </label>
-        <input type="text" name="insulinComment" />
-      </div>
-      <div class="content-gap">
-        <label for="ExerciseInput">Exercise: </label>
-        <input type="number" name="exercise" />
-      </div>
-      <div class="content-gap">
-        <label for="ExerciseInput">ExerciseComment: </label>
-        <input type="text" name="exerciseComment" />
-      </div>
+      {{#if displayGlucose}}
+        <div class="content-gap">
+          <label for="BGLInput">Blood Glucose Level: </label>
+          <input
+            type="number"
+            name="glucose"
+            min={{glucoseLowerLimit}}
+            max={{glucoseUpperLimit}}
+          />
+        </div>
+        <div class="content-gap" style="{{glucoseStyle}}">
+          <label for="BGLInput">Blood Glucose Level Comment: </label>
+          <input type="text" name="glucoseComment" />
+        </div>
+      {{/if}}
+
+      {{#if displayWeight}}
+        <div class="content-gap">
+          <label for="WeightInput">Weight: </label>
+          <input
+            type="number"
+            name="weight"
+            min={{weightLowerLimit}}
+            max={{weightUpperLimit}}
+          />
+        </div>
+        <div class="content-gap" style="{{weightStyle}}">
+          <label for="WeightInput">Weight Comment: </label>
+          <input type="text" name="weightComment" />
+        </div>
+      {{/if}}
+
+      {{#if displayInsulin}}
+        <div class="content-gap" style="{{insulinStyle}}">
+          <label for="DILInput">Doses Insulin Taken: </label>
+          <input
+            type="number"
+            name="insulin"
+            min={{insulinLowerLimit}}
+            max={{insulinUpperLimit}}
+          />
+        </div>
+        <div class="content-gap" style="{{insulinStyle}}">
+          <label for="DILInput">Insulin Comment: </label>
+          <input type="text" name="insulinComment" />
+        </div>
+      {{/if}}
+
+      {{#if displayExercise}}
+        <div class="content-gap" style="{{exerciseStyle}}">
+          <label for="ExerciseInput">Exercise: </label>
+          <input
+            type="number"
+            name="exercise"
+            min={{exerciseLowerLimit}}
+            max={{exerciseUpperLimit}}
+          />
+        </div>
+        <div class="content-gap" style="{{exerciseStyle}}">
+          <label for="ExerciseInput">ExerciseComment: </label>
+          <input type="text" name="exerciseComment" />
+        </div>
+      {{/if}}
+
       <button type="submit" id="submitButton" class="sendbn">Send</button>
     </form>
   </div>

@@ -5,26 +5,93 @@
   <h1>Born on {{yearOfBirth}}</h1>
   <h1>{{bio}}</h1>
 
+  <div style="width:30vw">
+    <form action="/clinician/patient/{{patientID}}/requiredFields" method="post" id="updateRequiredRecordForm">
+      <div class="content-gap">
 
-<div class="midcontent1">
-  <table>
-    <tr>
-      <th>Date</th>
-      <th>Blood Glucose Level</th>
-      <th>Weight</th>
-      <th>Doses of Insulin Taken</th>
-      <th>Exercise</th>
-    </tr>
-    {{#each records}}
+        <label for="glucose" class="gap-name"><b>Glucose</b></label>
+        <input type="checkbox" placeholder="Can record glucose" name="glucose"/>
+        <br/>
+        <label for="insulin" class="gap-name"><b>Insulin</b></label>
+        <input type="checkbox" placeholder="Can record insulin" name="insulin" />
+        <br/>
+        <label for="weight" class="gap-name"><b>Weight</b></label>
+        <input type="checkbox" placeholder="Can record weight" name="weight" />
+        <br/>
+        <label for="exercise" class="gap-name"><b>Exercise</b></label>
+        <input type="checkbox" placeholder="Can record exercise" name="exercise" />
+        <br/>
+
+        <button type="submit">Change recording ability</button>
+      </div>
+    </form>
+  </div>
+
+  <div style="width:30vw">
+    <form action="/clinician/patient/{{patientID}}/recordLimits" method="post" id="limitForm">
+      <div class="content-gap">
+
+        <label for="glucoseLowerLimit" class="gap-name"><b>Glucose Lower Limit</b></label>
+        <input type="number" name="glucoseLowerLimit"/>
+        <label for="glucoseUpperLimit" class="gap-name"><b>Glucose Upper Limit</b></label>
+        <input type="number" name="glucoseUpperLimit"/>
+        <br/>
+
+        <label for="insulinLowerLimit" class="gap-name"><b>Insulin Lower Limit</b></label>
+        <input type="number" name="insulinLowerLimit" />
+        <label for="insulinUpperLimit" class="gap-name"><b>Insulin Upper Limit</b></label>
+        <input type="number" name="insulinUpperLimit" />
+        <br/>
+
+        <label for="weightLowerLimit" class="gap-name"><b>Weight Lower Limit</b></label>
+        <input type="number" name="weightLowerLimit" />
+        <label for="weightUpperLimit" class="gap-name"><b>Weight Upper Limit</b></label>
+        <input type="number" name="weightUpperLimit" />
+        <br/>
+
+        <label for="exerciseLowerLimit" class="gap-name"><b>Exercise Lower Limit</b></label>
+        <input type="number" name="exerciseLowerLimit" />
+        <label for="exerciseUpperLimit" class="gap-name"><b>Exercise Upper Limit</b></label>
+        <input type="number" name="exerciseUpperLimit" />
+        <br/>
+
+        <button type="submit">Change Records Limits</button>
+      </div>
+    </form>
+  </div>
+
+  <div style="width:30vw">
+    <form action="/clinician/patient/{{patientID}}/supportMessage" method="post" id="supportMessageForm">
+      <div class="content-gap">
+
+        <label for="supportMessage" class="gap-name"><b>Support Message</b></label>
+        <input type="text" name="supportMessage"/>
+        <br/>
+
+        <button type="submit">Update Support Message</button>
+      </div>
+    </form>
+  </div>
+
+
+  <div class="midcontent1">
+    <table>
       <tr>
-        <td>{{date}}</td>
-        <td>{{glucose}}<br />{{glucoseComment}}</td>
-        <td>{{weight}}<br />{{weightComment}}</td>
-        <td>{{insulin}}<br />{{insulinComment}}</td>
-        <td>{{exercise}}<br />{{exerciseComment}}</td>
+        <th>Date</th>
+        <th>Blood Glucose Level</th>
+        <th>Weight</th>
+        <th>Doses of Insulin Taken</th>
+        <th>Exercise</th>
       </tr>
-    {{/each}}
-  </table>
-</div>
-
+      {{#each records}}
+        <tr>
+          <td>{{date}}</td>
+          <td>{{glucose}}<br />{{glucoseComment}}</td>
+          <td>{{weight}}<br />{{weightComment}}</td>
+          <td>{{insulin}}<br />{{insulinComment}}</td>
+          <td>{{exercise}}<br />{{exerciseComment}}</td>
+        </tr>
+      {{/each}}
+    </table>
+  </div>
 </div>
