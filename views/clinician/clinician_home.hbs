@@ -31,10 +31,35 @@
       <tr>
         <td>{{name}}</td>
         <td>{{mostRecentRecord.date}}</td>
-        <td>{{mostRecentRecord.glucose}}<br/>{{mostRecentRecord.glucoseComment}}</td>
-        <td>{{mostRecentRecord.weight}}<br/>{{mostRecentRecord.weightComment}}</td>
-        <td>{{mostRecentRecord.insulin}}<br/>{{mostRecentRecord.insulinComment}}</td>
-        <td>{{mostRecentRecord.exercise}}<br/>{{mostRecentRecord.exerciseComment}}</td>
+
+         {{#if insideSafetyThreshold.glucose}}
+          <td>{{mostRecentRecord.glucose}}<br />{{mostRecentRecord.glucoseComment}}</td>
+        {{else}}
+          <td class="outsideSafetyThreshold">{{mostRecentRecord.glucose}}<br
+            />{{mostRecentRecord.glucoseComment}}</td>
+        {{/if}}
+
+        {{#if insideSafetyThreshold.weight}}
+          <td>{{mostRecentRecord.weight}}<br />{{mostRecentRecord.weightComment}}</td>
+        {{else}}
+          <td class="outsideSafetyThreshold">{{mostRecentRecord.weight}}<br
+            />{{mostRecentRecord.weightComment}}</td>
+        {{/if}}
+
+        {{#if insideSafetyThreshold.insulin}}
+          <td>{{mostRecentRecord.insulin}}<br />{{mostRecentRecord.insulinComment}}</td>
+        {{else}}
+          <td class="outsideSafetyThreshold">{{mostRecentRecord.insulin}}<br
+            />{{mostRecentRecord.insulinComment}}</td>
+        {{/if}}
+
+        {{#if insideSafetyThreshold.exercise}}
+          <td>{{mostRecentRecord.exercise}}<br />{{mostRecentRecord.exerciseComment}}</td>
+        {{else}}
+          <td class="outsideSafetyThreshold">{{mostRecentRecord.exercise}}<br
+            />{{mostRecentRecord.exerciseComment}}</td>
+        {{/if}}
+
         <td>{{supportMessage}}</td>
 
         <td>

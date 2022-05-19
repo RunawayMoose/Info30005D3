@@ -110,13 +110,37 @@
         <th>Doses of Insulin Taken</th>
         <th>Exercise</th>
       </tr>
+      
       {{#each records}}
         <tr>
           <td>{{date}}</td>
+        {{#if insideSafetyThreshold.glucose}}
           <td>{{glucose}}<br />{{glucoseComment}}</td>
+        {{else}}
+          <td class="outsideSafetyThreshold">{{glucose}}<br
+            />{{glucoseComment}}</td>
+        {{/if}}
+
+        {{#if insideSafetyThreshold.weight}}
           <td>{{weight}}<br />{{weightComment}}</td>
+        {{else}}
+          <td class="outsideSafetyThreshold">{{weight}}<br
+            />{{weightComment}}</td>
+        {{/if}}
+
+        {{#if insideSafetyThreshold.insulin}}
           <td>{{insulin}}<br />{{insulinComment}}</td>
+        {{else}}
+          <td class="outsideSafetyThreshold">{{insulin}}<br
+            />{{insulinComment}}</td>
+        {{/if}}
+
+        {{#if insideSafetyThreshold.exercise}}
           <td>{{exercise}}<br />{{exerciseComment}}</td>
+        {{else}}
+          <td class="outsideSafetyThreshold">{{exercise}}<br
+            />{{exerciseComment}}</td>
+        {{/if}}
         </tr>
       {{/each}}
     </table>

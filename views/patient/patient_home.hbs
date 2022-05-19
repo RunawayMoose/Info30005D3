@@ -7,12 +7,41 @@
   <h1>How are you, {{givenName}}</h1>
 </div>
 
-<div class="midcontent">
-  <h1>Support Message: {{supportMessage}}</h1>
-</div>
+{{#if supportMessage}}
+  <div class="midcontent">
+    <h1>Support Message: {{supportMessage}}</h1>
+  </div>
+{{/if}}
 
 <div style="width:100%; text-align:center">
   <p class="alert">{{errorMessage}}</p>
+</div>
+
+{{#if showEngagementBadge}}
+  <div style="width:100%; text-align:center">
+    <img style="width:15vw;height:15vh" src="/star.svg" />
+    <h4>Congratulations for achieving a fantastic engagement rate! Keep up the
+      good work and good health.</h4>
+  </div>
+{{/if}}
+
+<div style="width:100%; text-align:center">
+  <h2>Leaderboard</h2>
+  <table>
+    <tr>
+      <th>Rank</th>
+      <th>Name</th>
+      <th>Engagement Rate</th>
+    </tr>
+
+    {{#each leaderboard}}
+      <tr>
+        <td>{{rank}}</td>
+        <td>{{screenName}}</td>
+        <td>{{engagementRate}}</td>
+      </tr>
+    {{/each}}
+  </table>
 </div>
 
 <div class="GPcontent">
@@ -26,8 +55,8 @@
           <input
             type="number"
             name="glucose"
-            min={{glucoseLowerLimit}}
-            max={{glucoseUpperLimit}}
+            min={{validation.glucoseLowerLimit}}
+            max={{validation.glucoseUpperLimit}}
           />
         </div>
         <div class="content-gap" style="{{glucoseStyle}}">
@@ -42,8 +71,8 @@
           <input
             type="number"
             name="weight"
-            min={{weightLowerLimit}}
-            max={{weightUpperLimit}}
+            min={{validation.weightLowerLimit}}
+            max={{validation.weightUpperLimit}}
           />
         </div>
         <div class="content-gap" style="{{weightStyle}}">
@@ -58,8 +87,8 @@
           <input
             type="number"
             name="insulin"
-            min={{insulinLowerLimit}}
-            max={{insulinUpperLimit}}
+            min={{validation.insulinLowerLimit}}
+            max={{validation.insulinUpperLimit}}
           />
         </div>
         <div class="content-gap" style="{{insulinStyle}}">
@@ -74,8 +103,8 @@
           <input
             type="number"
             name="exercise"
-            min={{exerciseLowerLimit}}
-            max={{exerciseUpperLimit}}
+            min={{validation.exerciseLowerLimit}}
+            max={{validation.exerciseUpperLimit}}
           />
         </div>
         <div class="content-gap" style="{{exerciseStyle}}">
@@ -98,13 +127,38 @@
       <th>Doses of Insulin Taken</th>
       <th>Exercise</th>
     </tr>
+
     {{#each records}}
       <tr>
         <td>{{date}}</td>
-        <td>{{glucose}}<br />{{glucoseComment}}</td>
-        <td>{{weight}}<br />{{weightComment}}</td>
-        <td>{{insulin}}<br />{{insulinComment}}</td>
-        <td>{{exercise}}<br />{{exerciseComment}}</td>
+
+        {{#if insideSafetyThreshold.glucose}}
+          <td>{{glucose}}<br />{{glucoseComment}}</td>
+        {{else}}
+          <td class="outsideSafetyThreshold">{{glucose}}<br
+            />{{glucoseComment}}</td>
+        {{/if}}
+
+        {{#if insideSafetyThreshold.weight}}
+          <td>{{weight}}<br />{{weightComment}}</td>
+        {{else}}
+          <td class="outsideSafetyThreshold">{{weight}}<br
+            />{{weightComment}}</td>
+        {{/if}}
+
+        {{#if insideSafetyThreshold.insulin}}
+          <td>{{insulin}}<br />{{insulinComment}}</td>
+        {{else}}
+          <td class="outsideSafetyThreshold">{{insulin}}<br
+            />{{insulinComment}}</td>
+        {{/if}}
+
+        {{#if insideSafetyThreshold.exercise}}
+          <td>{{exercise}}<br />{{exerciseComment}}</td>
+        {{else}}
+          <td class="outsideSafetyThreshold">{{exercise}}<br
+            />{{exerciseComment}}</td>
+        {{/if}}
       </tr>
     {{/each}}
   </table>

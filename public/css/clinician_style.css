@@ -197,3 +197,7 @@ input[type="password"] {
   text-overflow: ellipsis;
   word-wrap: break-word;
 }
+
+.outsideSafetyThreshold {
+  color: red;
+}

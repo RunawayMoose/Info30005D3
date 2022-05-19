@@ -1,5 +1,6 @@
 const Patient = require("../models/patient");
 const Clinician = require("../models/clinician");
+const validateUserBounds = require("../util/validation").validateUserBounds;
 
 exports.home_GET = async function (req, res) {
   const clinicianData = await Clinician.findOne({
@@ -11,11 +12,8 @@ exports.home_GET = async function (req, res) {
   );
   const patientData = await Promise.all(patientPromises);
 
-  const patientDataTransformed = patientData.map((patient) => ({
-    patientURL: `patient/${patient._id}`,
-    name: `${patient.givenName} ${patient.familyName}`,
-    supportMessage: patient.supportMessage,
-    mostRecentRecord: patient.records
+  const patientDataTransformed = patientData.map((patient) => {
+    const mostRecentRecord = patient.records
       .sort((a, b) => {
         return new Date(b.date) - new Date(a.date);
       })
@@ -29,8 +27,26 @@ exports.home_GET = async function (req, res) {
         insulinComment: record.insulinComment,
         exercise: record.exercise ?? "Not Recorded",
         exerciseComment: record.exerciseComment,
-      }))[0],
-  }));
+      }))[0];
+
+    let validation = {};
+    if (mostRecentRecord) {
+      // validate input is within reasonable bounds
+      validation = validateUserBounds(
+        ["glucose", "weight", "insulin", "exercise"],
+        mostRecentRecord,
+        patient
+      );
+    }
+
+    return {
+      patientURL: `patient/${patient._id}`,
+      name: `${patient.givenName} ${patient.familyName}`,
+      supportMessage: patient.supportMessage,
+      mostRecentRecord,
+      insideSafetyThreshold: validation,
+    };
+  });
 
   res.render("clinician_home", {
     username: req.user.username,
@@ -89,6 +105,13 @@ exports.patientView_GET = async function (req, res) {
     records: patientData.records.map((record) => {
       const oldDate = record.date;
 
+      // validate input is within user-set bounds
+      const validation = validateUserBounds(
+        ["glucose", "weight", "insulin", "exercise"],
+        record,
+        patientData
+      );
+
       return {
         date: oldDate?.toLocaleDateString("en-AU"),
         glucose: record.glucose ?? "Not Recorded",
@@ -99,6 +122,8 @@ exports.patientView_GET = async function (req, res) {
         insulinComment: record.insulinComment,
         exercise: record.exercise ?? "Not Recorded",
         exerciseComment: record.exerciseComment,
+
+        insideSafetyThreshold: validation,
       };
     }),
     clinicalNotes:
@@ -207,15 +232,15 @@ exports.comments_GET = async function (req, res) {
 
   const patients = await Promise.all(patientPromises);
 
-  const intermediatePatients = patients.map((patient) => ({
+  const transformedPatients = patients.map((patient) => ({
     records: patient.records,
     name: `${patient.givenName} ${patient.familyName}`,
     patientURL: `/clinician/patient/${patient._id}`,
   }));
 
-  const comments = intermediatePatients
-    .map((intermediatePatient) => {
-      return intermediatePatient.records
+  const comments = transformedPatients
+    .map((transformedPatient) =>
+      transformedPatient.records
         .map((record) => {
           let commentArray = [];
 
@@ -223,10 +248,10 @@ exports.comments_GET = async function (req, res) {
             const commentKey = key + "Comment";
             if (record[commentKey]) {
               commentArray.push({
-                name: intermediatePatient.name,
+                name: transformedPatient.name,
                 comment: record[commentKey],
                 date: new Date(record.date).toLocaleDateString("en-AU"),
-                patientURL: intermediatePatient.patientURL,
+                patientURL: transformedPatient.patientURL,
               });
             }
           });
@@ -234,8 +259,8 @@ exports.comments_GET = async function (req, res) {
           return commentArray;
         })
         .filter((commentArr) => commentArr.length > 0)
-        .flat();
-    })
+        .flat()
+    )
     .flat();
 
   res.render("clinician_comments", {
