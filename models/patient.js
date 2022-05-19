@@ -2,6 +2,13 @@ const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const ClinicalNote = new Schema(
+  {
+    message: { type: String, required: true },
+  },
+  { timestamps: true }
+);
+
 const Patient = new Schema(
   {
     username: { type: String, required: true },
@@ -51,6 +58,13 @@ const Patient = new Schema(
     ],
 
     supportMessage: { type: String, required: false },
+    // clinicalNotes: [
+    //   {
+    //     type: Schema.Types.ObjectId,
+    //     ref: "ClinicalNote",
+    //   },
+    // ],
+    clinicalNotes: [ClinicalNote],
   },
   { timestamps: true }
 );
@@ -63,6 +77,7 @@ Patient.methods.verifyPassword = function (password, callback) {
 
 // Hash password before saving
 Patient.pre("save", function save(next) {
+  console.info("Password has been changed");
   const user = this;
   // Go to next if password field has not been modified
   if (!user.isModified("password")) {

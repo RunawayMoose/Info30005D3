@@ -1,0 +1,21 @@
+<h2>Recent Comments From Your Patients</h2>
+
+<table>
+  <tr>
+    <th class="intro">Patient</th>
+    <th class="intro">Comment</th>
+    <th class="intro">Date</th>
+  </tr>
+
+  {{#each rows}}
+    <tr>
+      <td>{{name}}</td>
+      <td>
+        <a href="{{patientURL}}">
+          {{comment}}
+        </a>
+      </td>
+      <td>{{date}}</td>
+    </tr>
+  {{/each}}
+</table>

@@ -109,3 +109,20 @@
     {{/each}}
   </table>
 </div>
+
+<div style="width:30vw">
+  <form
+    action="/patient/home/changePassword"
+    method="post"
+    id="changePasswordForm"
+  >
+    <div class="content-gap">
+
+      <label for="newPassword" class="gap-name"><b>Change Password</b></label>
+      <input type="password" name="newPassword" placeholder="New Password" />
+      <br />
+
+      <button type="submit">Change Password</button>
+    </div>
+  </form>
+</div>

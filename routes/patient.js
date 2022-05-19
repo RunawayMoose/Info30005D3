@@ -32,5 +32,10 @@ router.get("/logout", function (req, res) {
 // Regular Routes
 router.get("/home", authMiddleware, patientController.home_GET);
 router.post("/home", authMiddleware, patientController.home_POST);
+router.post(
+  "/home/changePassword",
+  authMiddleware,
+  patientController.changePassword
+);
 
 module.exports = router;

@@ -19,12 +19,16 @@ exports.home_GET = async function (req, res) {
       .sort((a, b) => {
         return new Date(b.date) - new Date(a.date);
       })
-      .map((patient) => ({
-        date: new Date(patient.date).toLocaleDateString("en-AU"),
-        glucose: patient.glucose ?? "Not Recorded",
-        weight: patient.weight ?? "Not Recorded",
-        insulin: patient.insulin ?? "Not Recorded",
-        exercise: patient.exercise ?? "Not Recorded",
+      .map((record) => ({
+        date: new Date(record.date).toLocaleDateString("en-AU"),
+        glucose: record.glucose ?? "Not Recorded",
+        glucoseComment: record.glucoseComment,
+        weight: record.weight ?? "Not Recorded",
+        weightComment: record.weightComment,
+        insulin: record.insulin ?? "Not Recorded",
+        insulinComment: record.insulinComment,
+        exercise: record.exercise ?? "Not Recorded",
+        exerciseComment: record.exerciseComment,
       }))[0],
   }));
 
@@ -88,11 +92,27 @@ exports.patientView_GET = async function (req, res) {
       return {
         date: oldDate?.toLocaleDateString("en-AU"),
         glucose: record.glucose ?? "Not Recorded",
+        glucoseComment: record.glucoseComment,
         weight: record.weight ?? "Not Recorded",
+        weightComment: record.weightComment,
         insulin: record.insulin ?? "Not Recorded",
+        insulinComment: record.insulinComment,
         exercise: record.exercise ?? "Not Recorded",
+        exerciseComment: record.exerciseComment,
       };
     }),
+    clinicalNotes:
+      patientData.clinicalNotes &&
+      patientData.clinicalNotes
+        .sort((a, b) => {
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        })
+        .map((note) => {
+          return {
+            date: new Date(note.createdAt).toLocaleString("en-AU"),
+            message: note.message,
+          };
+        }),
   });
 };
 
@@ -151,4 +171,74 @@ exports.patientView_POST_supportMessage = async function (req, res) {
   });
 
   res.redirect(`/clinician/patient/${patientID}`);
+};
+
+exports.patientView_POST_clinicalNote = async function (req, res) {
+  const patientID = req.params.patientID;
+
+  const clinicalNote = req.body.clinicalNote;
+
+  if (!clinicalNote) {
+    return;
+  }
+
+  Patient.findByIdAndUpdate(
+    patientID,
+    {
+      $push: { clinicalNotes: { message: clinicalNote } },
+    },
+    {},
+    (err) => {
+      console.error(err);
+    }
+  );
+
+  res.redirect(`/clinician/patient/${patientID}`);
+};
+
+exports.comments_GET = async function (req, res) {
+  const clinician = await Clinician.findOne({
+    username: req.user.username,
+  }).lean();
+
+  const patientPromises = clinician.patients.map((patientID) =>
+    Patient.findById(patientID).exec()
+  );
+
+  const patients = await Promise.all(patientPromises);
+
+  const intermediatePatients = patients.map((patient) => ({
+    records: patient.records,
+    name: `${patient.givenName} ${patient.familyName}`,
+    patientURL: `/clinician/patient/${patient._id}`,
+  }));
+
+  const comments = intermediatePatients
+    .map((intermediatePatient) => {
+      return intermediatePatient.records
+        .map((record) => {
+          let commentArray = [];
+
+          ["glucose", "weight", "insulin", "exercise"].forEach((key) => {
+            const commentKey = key + "Comment";
+            if (record[commentKey]) {
+              commentArray.push({
+                name: intermediatePatient.name,
+                comment: record[commentKey],
+                date: new Date(record.date).toLocaleDateString("en-AU"),
+                patientURL: intermediatePatient.patientURL,
+              });
+            }
+          });
+
+          return commentArray;
+        })
+        .filter((commentArr) => commentArr.length > 0)
+        .flat();
+    })
+    .flat();
+
+  res.render("clinician_comments", {
+    rows: comments,
+  });
 };

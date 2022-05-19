@@ -2,9 +2,17 @@
 
 <div class="midcontent">
   <h1>Welcome back, {{username}}</h1>
-  <button>
-    <a href="/clinician/register_patient">Register new patient</a>
-  </button>
+  <a href="/clinician/register_patient">
+    <button>
+      Register new patient
+    </button>
+  </a>
+  
+  <a href="/clinician/comments">
+    <button>
+    See patient comments
+    </button>
+  </a>
 
   <table>
     <tr>
@@ -14,7 +22,7 @@
       <th class="intro">Weight (kg)</th>
       <th class="intro">Doses of Insulin Taken</th>
       <th class="intro">Exercise (kcal)</th>
-      <th class="intro">Message</th>
+      <th class="intro">Support Message</th>
       <th class="intro">Patient Link</th>
 
     </tr>
@@ -23,10 +31,10 @@
       <tr>
         <td>{{name}}</td>
         <td>{{mostRecentRecord.date}}</td>
-        <td>{{mostRecentRecord.glucose}}</td>
-        <td>{{mostRecentRecord.weight}}</td>
-        <td>{{mostRecentRecord.insulin}}</td>
-        <td>{{mostRecentRecord.exercise}}</td>
+        <td>{{mostRecentRecord.glucose}}<br/>{{mostRecentRecord.glucoseComment}}</td>
+        <td>{{mostRecentRecord.weight}}<br/>{{mostRecentRecord.weightComment}}</td>
+        <td>{{mostRecentRecord.insulin}}<br/>{{mostRecentRecord.insulinComment}}</td>
+        <td>{{mostRecentRecord.exercise}}<br/>{{mostRecentRecord.exerciseComment}}</td>
         <td>{{supportMessage}}</td>
 
         <td>

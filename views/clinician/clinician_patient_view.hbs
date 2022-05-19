@@ -73,6 +73,33 @@
     </form>
   </div>
 
+  <div style="width:30vw">
+    <form action="/clinician/patient/{{patientID}}/clinicalNotes" method="post" id="clinicalNotesForm">
+      <div class="content-gap">
+
+        <label for="clinicalNote" class="gap-name"><b>Clinical Note</b></label>
+        <input type="text" name="clinicalNote"/>
+        <br/>
+
+        <button type="submit">Add New Clinical Note</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="midcontent1">
+    <table>
+      <tr>
+        <th>Date</th>
+        <th>Note</th>
+      </tr>
+      {{#each clinicalNotes}}
+        <tr>
+          <td>{{date}}</td>
+          <td>{{message}}</td>
+        </tr>
+      {{/each}}
+    </table>
+  </div>
 
   <div class="midcontent1">
     <table>

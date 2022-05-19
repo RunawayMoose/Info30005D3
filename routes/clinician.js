@@ -97,4 +97,12 @@ router.post(
   clinicianController.patientView_POST_supportMessage
 );
 
+router.post(
+  "/patient/:patientID/clinicalNotes",
+  authMiddleware,
+  clinicianController.patientView_POST_clinicalNote
+);
+
+router.get("/comments", authMiddleware, clinicianController.comments_GET);
+
 module.exports = router;

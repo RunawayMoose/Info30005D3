@@ -1,3 +1,4 @@
+const { registerDecorator } = require("handlebars");
 const Patient = require("../models/patient");
 const sameDay = require("../util/dateUtil").sameDay;
 const validateAllFields = require("../util/validation");
@@ -53,6 +54,10 @@ exports.home_GET = async function (req, res) {
 
 // add a new health record
 exports.home_POST = async function (req, res) {
+  const patientJSON = await Patient.findOne({
+    username: req.user.username,
+  }).lean();
+
   const newRecord = {
     date: new Date().toISOString().split("T")[0],
     glucose: req.body.glucose,
@@ -63,17 +68,18 @@ exports.home_POST = async function (req, res) {
     insulinComment: req.body.insulinComment,
     exercise: req.body.exercise,
     exerciseComment: req.body.exerciseComment,
+
+    recordGlucose: patientJSON.shouldRecordGlucose,
+    recordWeight: patientJSON.shouldRecordWeight,
+    recordInsulin: patientJSON.shouldRecordInsulin,
+    recordExercise: patientJSON.shouldRecordExercise,
   };
 
-  const oldPatient = await Patient.findOne({
-    username: req.user.username,
-  }).lean();
-  const oldPatientRecords = oldPatient.records;
-
+  // validate input is within bounds
   const validation = validateAllFields(
     ["glucose", "weight", "insulin", "exercise"],
     newRecord,
-    oldPatient
+    patientJSON
   );
 
   if (!validation.valid) {
@@ -84,14 +90,13 @@ exports.home_POST = async function (req, res) {
     return false;
   }
 
-  const todaysRecord = oldPatientRecords.find((record) =>
+  const patientRecords = patientJSON.records;
+
+  const todaysRecord = patientRecords.find((record) =>
     sameDay(new Date(record.date), new Date())
   );
 
-  let newPatient;
-
   if (todaysRecord) {
-    console.log("found todays record");
     const modifiedRecord = {
       date: todaysRecord.date,
       glucose: todaysRecord.glucose ? todaysRecord.glucose : newRecord.glucose,
@@ -100,9 +105,14 @@ exports.home_POST = async function (req, res) {
       exercise: todaysRecord.exercise
         ? todaysRecord.exercise
         : newRecord.exercise,
+
+      recordGlucose: patientJSON.shouldRecordGlucose,
+      recordWeight: patientJSON.shouldRecordWeight,
+      recordInsulin: patientJSON.shouldRecordInsulin,
+      recordExercise: patientJSON.shouldRecordExercise,
     };
 
-    const patientRecordsWithoutTodays = oldPatientRecords.filter(
+    const patientRecordsWithoutTodays = patientRecords.filter(
       (record) => !sameDay(new Date(record.date), new Date())
     );
 
@@ -112,14 +122,31 @@ exports.home_POST = async function (req, res) {
       { new: true }
     ).lean();
   } else {
-    console.log("did not find todays record");
-
     newPatient = await Patient.findOneAndUpdate(
       { username: req.user.username },
-      { records: [...oldPatientRecords, newRecord] },
+      { records: [...patientRecords, newRecord] },
       { new: true }
     ).lean();
   }
+
+  res.redirect("/patient/home");
+};
+
+// change patient password
+exports.changePassword = async function (req, res) {
+  const patient = await Patient.findOne({ username: req.user.username });
+  const newPassword = req.body.newPassword;
+
+  patient.password = newPassword;
+
+  patient.save((err, newPatient) => {
+    if (err) {
+      console.error("ERROR CHANGING PASSWORD: ");
+      console.error(err);
+    } else {
+      console.log(newPatient);
+    }
+  });
 
   res.redirect("/patient/home");
 };
