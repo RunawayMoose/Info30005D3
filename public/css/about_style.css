@@ -1,30 +1,39 @@
+html,
+body {
+  margin: 0;
+}
+
 html * {
   font-family: Arial;
-}
-
-.flexbox {
-  width: 100%;
-  height: 80%;
-  display: flex;
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-}
-
-.centered_div {
-  width: 100%;
-  height: 80%;
-  display: flex;
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
 }
 
 body {
   background-color: #3d6e8a;
 }
-#rcorners7 {
+
+.outer-div {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.main-content {
+  display: flex;
+  width: 100%;
+  max-width: 60vw;
+  flex-direction: column;
+}
+
+.centered {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: start;
+  align-items: center;
+}
+
+.box {
   color: #eaf1f4;
   font-size: 17px;
   text-align: center;
@@ -32,46 +41,19 @@ body {
   border: 5px solid #b7dbe9;
   background: #173745;
   padding: 10px;
-  width: 348px;
-  height: 240px;
+  height: fit;
+  width: 100%;
 }
 
-nav {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: white;
-}
-
-div1 {
-  border: 0px;
-}
-
-li {
-  float: left;
-}
-
-h1 {
+h1,
+h2 {
   color: white;
 }
+
 p1 {
   font-style: italic;
   font-weight: bold;
   font-size: 18px;
-  color: white;
-}
-
-p2 {
-  font-weight: bold;
-  font-size: 16px;
-  color: white;
-}
-
-p3 {
-  font-weight: 600;
-  font-style: italic;
-  font-size: 16px;
   color: white;
 }
 
@@ -81,107 +63,74 @@ p3 {
   text-align: center;
 }
 
-#rcorners1 {
-  color: #568ea6;
-  font-size: 24px;
-  text-align: center;
-  border-radius: 25px;
-  border: 5px solid #b7dbe9;
-  background: white;
-  padding: 10px;
-  width: 348px;
-  height: 42px;
-}
-
-#rcorners2 {
-  color: white;
-  font-size: larger;
-  text-align: center;
-  border-radius: 25px;
-  border: 2px solid #eaf1f4;
-  background: #173745;
-  padding: 10px;
-  width: 200px;
-  height: 15px;
-}
-
-#rcorners3 {
+.nav-item {
   color: #173745;
   font-size: larger;
-  text-align: center;
   border-radius: 25px;
   border: 2px solid #173745;
   background: #b7dbe9;
   padding: 10px;
-  width: 200px;
   height: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  margin: 0.3em;
 }
 
-#rcorners4 {
-  color: #173745;
-  font-size: larger;
+.card {
+  color: #eaf1f4;
+  font-size: 17px;
   text-align: center;
   border-radius: 25px;
-  border: 2px solid #eaf1f4;
-  background: #b7dbe9;
+  border: 5px solid #b7dbe9;
+  background: #173745;
   padding: 10px;
-  width: 200px;
-  height: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
 }
 
-#rcorners5 {
-  line-height: 60px;
-  color: #b8c5cb;
-  font-size: large;
-  text-align: center;
-  border-radius: 50%;
-  border: 5px solid #b8c5cb;
-  background: #ffffff;
+.card > img {
   width: 60px;
   height: 60px;
 }
 
-#rcorners6 {
-  border-radius: 25px;
-  border: 0px solid #eaf1f4;
-  background: #b7dbe9;
-  padding: 10px;
-  width: 560px;
-  height: 17px;
+.card > a {
+  color: white !important;
 }
 
-#rcorners8 {
-  border-radius: 25px;
-  border: 0px solid #eaf1f4;
-  background: #b7dbe9;
-  padding: 10px;
-  width: 328px;
-  height: 6px;
+#socials > span > img {
+  width: 30px;
+  height: 30px;
 }
 
-#rcorners10 {
-  font-size: 16px;
-  color: #173745;
-  border-radius: 25px;
-  border: 5px solid #b7dbe9;
-  background: white;
-  padding: 10px;
-  width: 400px;
-  height: 15px;
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 60vw;
 }
 
-div3 {
-  font-size: 45px;
-  color: white;
-  text-shadow: 2px 2px 4px #000000;
+@media only screen and (max-width: 1200px) {
+  nav {
+    flex-direction: column;
+  }
+  .cards {
+    flex-direction: column;
+  }
+  .card {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    width: 100%;
+  }
 }
 
-img {
-  width: 17px;
-  height: 17px;
-}
-
-.image1 {
-  width: 59px;
-  height: 59px;
+@media only screen and (max-width: 600px) {
+  iframe {
+    width: 350px;
+  }
 }
