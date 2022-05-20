@@ -51,7 +51,7 @@
     <form action="/patient/home" , method="post" id="addRecordForm">
       {{#if displayGlucose}}
         <div class="content-gap">
-          <label for="BGLInput">Blood Glucose Level: </label>
+          <label for="BGLInput">Blood Glucose Level(mmol/L): </label>
           <input
             type="number"
             name="glucose"
@@ -67,7 +67,7 @@
 
       {{#if displayWeight}}
         <div class="content-gap">
-          <label for="WeightInput">Weight: </label>
+          <label for="WeightInput">Weight(kg): </label>
           <input
             type="number"
             name="weight"
@@ -99,7 +99,7 @@
 
       {{#if displayExercise}}
         <div class="content-gap" style="{{exerciseStyle}}">
-          <label for="ExerciseInput">Exercise: </label>
+          <label for="ExerciseInput">Exercise(kcal): </label>
           <input
             type="number"
             name="exercise"
@@ -122,10 +122,10 @@
   <table>
     <tr>
       <th>Date</th>
-      <th>Blood Glucose Level</th>
-      <th>Weight</th>
+      <th>Blood Glucose Level (mmol/L)</th>
+      <th>Weight(kg)</th>
       <th>Doses of Insulin Taken</th>
-      <th>Exercise</th>
+      <th>Exercise(kcal)</th>
     </tr>
 
     {{#each records}}
