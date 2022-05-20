@@ -53,8 +53,8 @@ button {
 }
 
 .log-in {
-  margin-left: 7%;
-  width: 40%;
+  margin-left: 28%;
+  width: 45%;
   border-radius: 0;
 }
 input[type="text"],
@@ -184,7 +184,7 @@ input[type="password"] {
   display: block;
   position: inline-block;
   padding-top: 20px;
-  margin-left: 50px;
+  margin-left:30%;
 }
 .authHeader {
   text-align: center;
