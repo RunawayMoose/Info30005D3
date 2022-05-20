@@ -1,13 +1,10 @@
-.flex-con {
-  display: flex;
+html,
+body {
+  margin: 0;
 }
 
-b1 {
-  color: #ffffff;
-  font-size: 30px;
-  width: 348px;
-  height: 201px;
-  background-color: #436d82;
+.flex-con {
+  display: flex;
 }
 
 table,
@@ -51,6 +48,15 @@ button {
   font-size: large;
 }
 
+.method {
+  width: 40%;
+}
+
+.log-in {
+  margin-left: 7%;
+  width: 40%;
+  border-radius: 0;
+}
 input[type="text"],
 input[type="password"] {
   border-radius: 100px;
@@ -64,14 +70,15 @@ input[type="password"] {
 
 .topnav {
   overflow: hidden;
-  background-color: #eaf1f4;
-  color: #436d82;
+  background-color: #B7DBE9;
+  color: #3D6E8A;
   text-align: center;
   height: 55px;
   font: Arial, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .topnav a {
@@ -103,6 +110,7 @@ input[type="password"] {
 }
 
 .register-style {
+  align-items: center;
   margin-top: 20px;
   display: flex;
   justify-content: space-between;
@@ -128,9 +136,16 @@ input[type="password"] {
   display: table;
   height: 100%;
   margin: 0 auto;
-  margin-top: 120px;
+  margin-top: 10vw;
 }
 
+.Pcontent {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: start;
+  align-items: center;
+}
 .Parentcontent {
   width: auto;
 }
@@ -147,11 +162,13 @@ input[type="password"] {
 
 .Pcontent #loginForm {
   padding: 10px;
-  background-color: #eaf1f4;
+  background-color: #B7DBE9;
   border: 1px solid #ddd;
-  width: 800px;
-  height: 350px;
+  width: 100%;
+  color: #3D6E8A;
+  height: fit-content;
   border-radius: 20px;
+  line-height: 150%;
 }
 
 .content-gap label {
@@ -160,13 +177,13 @@ input[type="password"] {
   text-align: right;
 }
 
+
 .content-gap {
-  width: 100%;
+  width: 40%;
   display: block;
   position: inline-block;
   padding-top: 20px;
-  margin: auto;
-  place-items: center;
+  margin-left: 50px;
 }
 .authHeader {
   text-align: center;
@@ -197,4 +214,11 @@ input[type="password"] {
 
 .outsideSafetyThreshold {
   color: red;
+}
+
+.main-content {
+  display: flex;
+  width: 100%;
+  max-width: 60vw;
+  flex-direction: column;
 }

@@ -9,29 +9,33 @@
 </div>
 
 <div class="GPcontent">
-  <div class="Pcontent">
-    <form action="/patient/login" , method="post" id="loginForm">
-      <div class="content-gap">
-        <label for="username" class="gap-name"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="username" />
-        <label for="password" class="gap-name"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="password" />
-        <div class="checkbox">
-          <label class="content-gap">
-            <input type="checkbox" value="remember-me" />Remember me
-          </label>
+  <div class="main-content">
+    <div class="Pcontent">
+      <form action="/patient/login" , method="post" id="loginForm">
+        <div class="content-gap">
+          <label for="username" class="gap-name"><b>Username</b></label>
+          <input type="text" placeholder="Enter Username" name="username" />
+          <label for="password" class="gap-name"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" name="password" />
+          <div class="checkbox">
+            <label class="content-gap">
+              <input type="checkbox" value="remember-me" />Remember me
+            </label>
+          </div>
+          
         </div>
-        <button type="submit">Log in</button>
-      </div>
-      <div class="register-style">
-        <a class="account-tell">Contact your clinician to create an account.</a>
+        <button type="submit" class="log-in">Log in</button>
+        <div class="register-style">
+          <a class="account-tell">Contact your clinician to create an account.</a>
 
-        <button>
-          <a href="/clinician">
-            Log in as clinician
-          </a>
-        </button>
-      </div>
-    </form>
+          <button class="method">
+            <a href="/clinician">
+              Log in as clinician
+            </a>
+          </button>
+        </div>
+      </form> 
+    </div>
   </div>
+  
 </div>

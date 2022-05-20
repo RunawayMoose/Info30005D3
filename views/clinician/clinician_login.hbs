@@ -1,29 +1,36 @@
 <div class="topnav">
-  <b class="log-size">Clinician Log In</b>
+  <div class="title"><h1><b>Clinician Log In</b></h1></div>
 </div>
 
 <div style="width:100%; text-align:center">
   {{#each flash}}
-    <p class="alert">{{this}}</p>
+  <p class="alert">{{this}}</p>
   {{/each}}
 </div>
 
 <div class="GPcontent">
-  <div class="Pcontent">
-    <form action="/clinician/login" , method="post" id="loginForm">
-      <div class="content-gap">
+  <div class="main-content">
+    <div class="Pcontent">
+      <form action="/clinician/login" , method="post" id="loginForm">
+        <div class="style-out">
+          <span class="content-gap">
 
-        <label for="username" class="gap-name"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="username" />
-        <label for="password" class="gap-name"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="password" />
+            <label for="username" class="gap-name"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="username" />
+            <label for="password" class="gap-name"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="password" />
+            <input type="checkbox"><text>Remember me</text>
 
-        <button type="submit">Log in</button>
-      </div>
-      <div class="register-style">
-        <a class="account-tell">Don&apos;t have an account?</a>
-        <a href="./register" class="no-deco">Register new Clinician</a>
-      </div>
-    </form>
+          </span>
+          <span class="register-style">
+            <button type="submit">Log in</button>
+
+            <button style="margin-top:50px" ><a href="./register" style="color: white;text-decoration: none;">Register</a></button>
+          </span>
+        </div>
+
+      </form>
+    </div>
   </div>
+
 </div>

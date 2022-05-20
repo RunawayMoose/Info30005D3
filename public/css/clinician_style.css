@@ -2,6 +2,11 @@ html * {
   font-family: Arial;
 }
 
+html,
+body {
+  margin: 0;
+}
+
 .flex-con {
   display: flex;
 }
@@ -22,7 +27,9 @@ th {
 
 td,
 th {
-  padding: 20px;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  word-wrap: break-word;
 }
 
 table {
@@ -31,6 +38,7 @@ table {
   color: #568ea6;
   width: 100%;
   font-size: 20px;
+  table-layout:fixed;
 }
 
 th {
@@ -38,13 +46,18 @@ th {
   color: #ffffff;
   font-size: 20px;
 }
-
+@media screen and (max-width: 650px) {
+  table {
+    overflow-x: auto;
+    display: block;
+  }
+}
 td {
   text-align: center;
 }
 
 button {
-  border-radius: 100px;
+ 
   background-color: #436d82;
   color: white;
   padding: 12px 20px;
@@ -68,25 +81,21 @@ input[type="password"] {
 
 .topnav {
   overflow: hidden;
-  background-color: #eaf1f4;
-  color: #436d82;
+  background-color: #B7DBE9;
+  color: #3D6E8A;
   text-align: center;
-  height: 55px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
 }
 
 .topnav a {
-  float: right;
+  float: left;
   background-color: #436d82;
   color: #ffffff;
   text-align: center;
-  padding: 14px 16px;
+  padding: 16px;
   text-decoration: none;
   font-size: 17px;
-  margin-top: 0;
-  margin-bottom: 0;
 }
 
 .topnav a:hover {
@@ -100,17 +109,40 @@ input[type="password"] {
 }
 
 .title {
-  font-size: 20px;
   text-align: center;
-  margin-left: -10px;
+  line-height: 180%;
+  flex:1 0 auto;
 }
-
-.register-style {
-  margin-top: 20px;
+.style-out{
   display: flex;
-  justify-content: space-between;
+flex-direction: row;
 }
+@media screen and (max-width: 650px){
+  .register-style {
+    margin-left: 80px;
+    margin-top: 60px;
+    display: flex;
+    /* justify-content: space-between; */
+    flex-direction: column;
+  
+  }
+ 
+}
+.register-style {
+  margin-left: 150px;
+  margin-top: 60px;
+  display: flex;
+  /* justify-content: space-between; */
+  flex-direction: column;
 
+}
+.content-gap {
+  width: 40%;
+  display: block;
+  position: inline-block;
+  padding-top: 20px;
+  margin-left: 50px;
+}
 .bigtable {
   display: flex;
   justify-content: center;
@@ -125,6 +157,9 @@ input[type="password"] {
   width: 80%;
   margin-left: auto;
   margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .GPcontent {
@@ -132,6 +167,14 @@ input[type="password"] {
   height: 100%;
   margin: 0 auto;
   margin-top: 120px;
+}
+
+.Pcontent {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
 }
 
 .Parentcontent {
@@ -150,11 +193,13 @@ input[type="password"] {
 
 .Pcontent #loginForm {
   padding: 10px;
-  background-color: #eaf1f4;
+  background-color: #B7DBE9;
   border: 1px solid #ddd;
-  width: 800px;
-  height: 350px;
+  width: 100%;
+  color: #3D6E8A;
+  height: fit-content;
   border-radius: 20px;
+  line-height: 150%;
 }
 
 .content-gap label {
@@ -163,14 +208,8 @@ input[type="password"] {
   text-align: right;
 }
 
-.content-gap {
-  width: 100%;
-  display: block;
-  position: inline-block;
-  padding-top: 20px;
-  margin: auto;
-  place-items: center;
-}
+
+
 .authHeader {
   text-align: center;
   color: #436d82;
@@ -178,6 +217,8 @@ input[type="password"] {
 
 .log-size {
   font-size: 30px;
+  text-align: center;
+  margin-left: 40%;
 }
 
 .gap-name {
@@ -200,4 +241,11 @@ input[type="password"] {
 
 .outsideSafetyThreshold {
   color: red;
+}
+
+.main-content {
+  display: flex;
+  width: 100%;
+  max-width: 60vw;
+  flex-direction: column;
 }
